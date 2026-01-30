@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>[Document Title] · A³RA Foundations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="[One-sentence description]" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <p><a href="./">← A³RA Foundations</a></p>
+        <h1>Defining a Trustworthy Action</h1>
+        <p class="subtitle">
+          What it means for an action to be trustworthy in a cyber-physical system
+        </p>
+      </header>
+
+      <p>
+        In the previous Foundation, we introduced a simple mission for trustworthy action
+        in cyber-physical systems, referred to as <strong>A<sup>3</sup>RA</strong>:
+      </p>
+
+      <blockquote>
+        <p>
+          Trustworthy actions in cyber-physical systems must be
+          <strong>Attributable</strong>, <strong>Admissible</strong>,
+          <strong>Auditable</strong>, and <strong>Recoverable</strong> — within an
+          explicitly defined <strong>Authority Scope</strong>.
+        </p>
+      </blockquote>
+
+      <p>
+        Before discussing frameworks or architectures, it is worth being precise about
+        what each of these terms means.
+      </p>
+
+      <h2 id="what-counts-as-an-action">What counts as an action?</h2>
+
+      <p>
+        An <strong>action</strong> includes any operation that changes the state,
+        behavior, or interpretation of a cyber-physical system — across both the
+        <strong>Control Plane</strong> and the <strong>Data Plane</strong>.
+      </p>
+
+      <p>
+        This includes device commands, configuration or firmware changes, as well as data
+        ingestion, transformation, aggregation, and inference that can influence physical
+        outcomes or operational decisions.
+      </p>
+
+      <p>
+        For example, an action could be an AI model’s command to shut down a hydraulic
+        pump based on anomalous vibration data.
+      </p>
+
+      <h2 id="authority-scope">Authority Scope</h2>
+
+      <p>
+        All four properties of trustworthy action depend on
+        <strong>Authority Scope</strong> being explicit.
+      </p>
+
+      <p>
+        Authority Scope defines the bounded domain in which an actor may take action —
+        specifying who may act, over which assets, under what conditions, and for how
+        long.
+      </p>
+
+      <p>
+        Authority that is implicit, unbounded, or opaque cannot be trusted. Making
+        Authority Scope explicit is what enables accountability and prevents unchecked or
+        coercive use of power within complex systems.
+      </p>
+
+      <h3>Figure 1 — A<sup>3</sup>RA and Authority Scope</h3>
+
+      <pre>
+Authority Scope (explicit, bounded)
+│
+└─ A<sup>3</sup>RA (Principles)
+   │
+   ├─ Attributable  ← Responsibility: identity, delegation, non-repudiation
+   │                  (who acted, on whose authority)
+   │
+   ├─ Admissible    ← Acceptability: context, system state, safety, policy
+   │                  (should this action occur now)
+   │
+   ├─ Auditable     ← Evidence: durable records, integrity, provenance
+   │                  (what happened, and why)
+   │
+   └─ Recoverable   ← Remediation: rollback, revocation, containment
+                      (what happens when things go wrong)
+</pre
+      >
+
+      <p class="figure-caption">
+        Authority Scope defines the limits of power; A<sup>3</sup>RA determines whether
+        actions taken within those limits can be trusted.
+      </p>
+
+      <h2 id="attributable">Attributable</h2>
+
+      <p>
+        An action is <strong>attributable</strong> if responsibility for it can be clearly
+        assigned.
+      </p>
+
+      <p>
+        Attribution requires binding an action to a responsible principal, an explicit
+        delegation chain, and a valid source of authority at the time the action was
+        taken.
+      </p>
+
+      <p>
+        Was the shutdown command initiated autonomously by the AI model, or by a remote
+        engineer approving the AI’s recommendation? A system must be able to attribute the
+        action to prove responsibility.
+      </p>
+
+      <h2 id="admissible">Admissible</h2>
+
+      <p>
+        An action is <strong>admissible</strong> if it is acceptable under the conditions
+        in which it occurs.
+      </p>
+
+      <p>
+        Authorization alone is insufficient. Admissibility accounts for system state,
+        safety constraints, regulatory conditions, and context at runtime.
+      </p>
+
+      <p>
+        If authorization answers <em>who may act</em>, admissibility answers
+        <em>whether the action is acceptable now</em>.
+      </p>
+
+      <p>
+        The AI is authorized to shut down the pump. But is that action admissible if the
+        production line is in the middle of a process that cannot be interrupted without
+        millions in losses? Admissibility weighs immediate operational cost against
+        long-term risk.
+      </p>
+
+      <h2 id="auditable">Auditable</h2>
+
+      <p>
+        An action is <strong>auditable</strong> if it can be independently examined after
+        it occurs.
+      </p>
+
+      <p>
+        Auditability requires durable, trustworthy evidence with sufficient context to
+        understand not just what happened, but why. Logs that cannot be trusted or
+        interpreted do not meet this bar.
+      </p>
+
+      <p>
+        When a shutdown is investigated, the audit trail must provide an immutable record
+        of the sensor data and AI model version, proving exactly why the decision was
+        made.
+      </p>
+
+      <h2 id="recoverable">Recoverable</h2>
+
+      <p>
+        An action is <strong>recoverable</strong> if harm resulting from it can be
+        mitigated, reversed, or contained.
+      </p>
+
+      <p>
+        Recoverability includes failsafe behavior, remediation paths, and the ability to
+        revoke authority when necessary. Systems that cannot recover from their own
+        actions externalize risk.
+      </p>
+
+      <p>
+        If the shutdown command is issued, can an operator immediately override it? Is
+        there a recoverable state, such as placing the pump in a safe mode instead of a
+        full stop?
+      </p>
+
+      <p>
+        A<sup>3</sup>RA is not an architectural framework; it is the test a cyber-physical
+        action must pass.
+      </p>
+
+      <p>
+        In the next Foundation, we will introduce the
+        <strong>Security, Compliance, and Governance (SCG) Framework</strong> — an
+        architectural model designed to ensure every action can pass that test.
+      </p>
+
+      <nav class="series-nav" aria-label="Foundation navigation">
+        <hr />
+
+        <div class="series-nav__row">
+          <a class="series-nav__prev" href="/foundations/accountability.html">
+            ← Previous: Foundation 1 — Accountability for Physical AI
+          </a>
+
+          <a class="series-nav__next" href="/foundations/scg-commercial.html">
+            Next: Foundation 3 — The Commercial Argument for the SCG Framework →
+          </a>
+        </div>
+
+        <p class="series-nav__meta">
+          Part of <a href="/foundations/">A<sup>3</sup>RA Foundations</a>
+        </p>
+      </nav>
+
+      <footer>
+        <hr />
+        <p>
+          © 2026 A<sup>3</sup>RA · CC BY-ND 4.0 ·
+          <a href="../license.html">License</a> ·
+          <a href="../">Home</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

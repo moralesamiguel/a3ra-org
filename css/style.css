@@ -57,6 +57,61 @@ pre {
   font-size: 0.9rem;
 }
 
+/* -------------------------------------------------
+   Series navigation (Foundations: previous / next)
+   -------------------------------------------------
+   Purpose:
+   - Provide linear, book-style navigation BETWEEN documents
+   - Kept at the bottom of the page to avoid competing
+     with in-document (TOC) navigation
+-------------------------------------------------- */
+
+.series-nav {
+  /* Space it away from the main content so it feels like an epilogue,
+     not part of the article body */
+  margin-top: 2rem;
+}
+
+.series-nav__row {
+  /* Horizontal layout for Previous / Next links */
+  display: flex;
+
+  /* Space between the two links */
+  gap: 1rem;
+
+  /* Push Previous left, Next right (book-style) */
+  justify-content: space-between;
+
+  /* Align text baselines so arrows and text feel balanced */
+  align-items: baseline;
+
+  /* Allow wrapping on narrow screens (mobile-friendly) */
+  flex-wrap: wrap;
+}
+
+.series-nav__prev,
+.series-nav__next {
+  /* Default link style: clean, non-intrusive */
+  text-decoration: none;
+}
+
+.series-nav__prev:hover,
+.series-nav__next:hover {
+  /* On hover, signal clickability without being loud */
+  text-decoration: underline;
+}
+
+.series-nav__meta {
+  /* Secondary context text ("Part of A³RA Foundations") */
+  margin-top: 0.75rem;
+
+  /* Slightly smaller than body text to de-emphasize */
+  font-size: 0.95em;
+
+  /* Subtle fade so it reads as metadata, not content */
+  opacity: 0.85;
+}
+
 /* Footer */
 footer {
   margin-top: 3rem;

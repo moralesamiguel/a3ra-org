@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>[Document Title] · A³RA Foundations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="[One-sentence description]" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <p><a href="./">← A³RA Foundations</a></p>
+        <h1>The Commercial Argument for the SCG Framework</h1>
+        <p class="subtitle">
+          Why trustworthy action must be automatable, auditable, and adaptable to be
+          viable at scale
+        </p>
+      </header>
+
+      <p>
+        In the first two Foundations of this series, we introduced
+        <strong>A<sup>3</sup>RA</strong> as the test for trustworthy action in a
+        cyber-physical system:
+      </p>
+
+      <p>
+        Actions must be <strong>Attributable</strong>, <strong>Admissible</strong>,
+        <strong>Auditable</strong>, and <strong>Recoverable</strong> — all within an
+        explicit <strong>Authority Scope</strong>.
+      </p>
+
+      <p>
+        This standard is ethically necessary, but on its own it is not a viable business
+        construct. The hard truth of the market is simple: if the cost of trust exceeds
+        the value of the product, trust will be bypassed—every time.
+      </p>
+
+      <p>This leads connected product OEMs to a more practical and urgent question:</p>
+
+      <blockquote>
+        <p>
+          Can we continue to sell, operate, and support connected products globally
+          without collapsing under the cost and complexity of security and regulation?
+        </p>
+      </blockquote>
+
+      <p>For A<sup>3</sup>RA to be commercially viable, its implementation must be:</p>
+
+      <ul>
+        <li>Automatable at scale</li>
+        <li>Auditable for regulators and customers</li>
+        <li>Adaptable to constant regulatory change</li>
+      </ul>
+
+      <p>
+        The framework that enables this is the
+        <strong>Security, Compliance, and Governance (SCG) Framework</strong>. It is
+        designed not just to make trust possible, but to make it sustainable under real
+        commercial constraints.
+      </p>
+
+      <h2 id="three-pressures">The Three Pressures Driving Business Risk</h2>
+
+      <p>
+        OEMs building connected products are confronting three converging pressures that
+        threaten business continuity. Consider them through the lens of a single asset: an
+        AI-monitored hydraulic pump on a factory floor.
+      </p>
+
+      <h3 id="security-risk">
+        1) Security risk is escalating faster than traditional defenses
+      </h3>
+
+      <p>
+        Attackers now use AI to rapidly identify, exploit, and scale vulnerabilities. For
+        a hydraulic pump, the risk is no longer just a data breach; it is a physical
+        threat. An attacker could trigger a malicious shutdown—or more subtly manipulate
+        sensor data to cause an unnecessary shutdown—costing the customer millions in
+        downtime.
+      </p>
+
+      <h3 id="compliance-market-access">2) Compliance now determines market access</h3>
+
+      <p>
+        Regulations like the EU Cyber Resilience Act and the Data Act formalize security
+        and data handling requirements that many products were never designed to meet. For
+        our pump, this means you must be able to prove why its AI initiated a shutdown,
+        providing a complete and immutable audit trail. Failing to do so can block your
+        product from an entire market.
+      </p>
+
+      <h3 id="governance-complexity">3) Governance complexity is exploding</h3>
+
+      <p>
+        As requirements fragment globally, governance becomes a nightmare. A customer in
+        one market may forbid automated pump shutdowns during a specific production run,
+        while a customer in another market mandates them for safety compliance. How do you
+        govern the same product under conflicting policies without creating manual,
+        error-prone, and expensive processes?
+      </p>
+
+      <p>
+        At global scale, these pressures converge into a single existential threat: a
+        business continuity problem.
+      </p>
+
+      <h2 id="scg-engine">The SCG Framework: The Engine for A<sup>3</sup>RA</h2>
+
+      <p>
+        The <strong>Security, Compliance, and Governance (SCG) Framework</strong> exists
+        to solve this problem by operationalizing the A<sup>3</sup>RA mission.
+      </p>
+
+      <p>
+        Where A<sup>3</sup>RA defines what makes an action trustworthy, SCG defines how
+        that standard is enforced at scale, in real systems, under real commercial
+        constraints.
+      </p>
+
+      <h3 id="scg-security">Security</h3>
+
+      <p>
+        <strong>Security</strong> is the system’s ability to resist, detect, and recover
+        from compromise. It answers: <em>Can this system be safely operated?</em>
+      </p>
+
+      <p>
+        In the SCG Framework, this is represented by a device’s
+        <strong>Security Posture</strong> — a live data model of its observable security
+        properties (for example: patch level, configuration state, known vulnerabilities).
+      </p>
+
+      <p>
+        This posture is foundational input to determining whether an action is
+        <strong>admissible</strong>.
+      </p>
+
+      <h3 id="scg-compliance">Compliance</h3>
+
+      <p>
+        <strong>Compliance</strong> is the system’s ability to demonstrate adherence to
+        external rules—regulatory, contractual, or legal. It answers:
+        <em>Can this product be sold and operated in this market?</em>
+      </p>
+
+      <p>
+        In SCG, compliance is the continuous evaluation of a device’s Security Posture
+        against relevant policies.
+      </p>
+
+      <p>
+        This continuous evaluation produces the evidence needed to make actions
+        <strong>auditable</strong>.
+      </p>
+
+      <h3 id="scg-governance">Governance</h3>
+
+      <p>
+        <strong>Governance</strong> is the decision and control layer that authorizes
+        policy, executes remediation, and ensures accountability. It answers:
+        <em>Who is allowed to do what—and under what conditions?</em>
+      </p>
+
+      <p>
+        Governance is the enforcement layer: it acts when compliance rules are met or
+        violated.
+      </p>
+
+      <p>
+        This control layer makes actions <strong>attributable</strong> to clear authority
+        and ensures actions are <strong>recoverable</strong> when things go wrong.
+      </p>
+
+      <h2 id="liability-to-asset">From Liability to Asset</h2>
+
+      <p>
+        Without a unifying framework, Security, Compliance, and Governance are managed in
+        separate silos—creating compounding cost, risk, and operational drag.
+      </p>
+
+      <p>
+        SCG fuses them into a single, automatable engine. It provides the proof that makes
+        trust sustainable and commercially rational.
+      </p>
+
+      <ul>
+        <li>
+          The <strong>Security</strong> layer provides a live, verifiable posture for
+          every asset, making actions technically trustworthy.
+        </li>
+        <li>
+          The <strong>Compliance</strong> layer continuously evaluates that posture
+          against policy, making outcomes defensible.
+        </li>
+        <li>
+          The <strong>Governance</strong> layer automates enforcement, making operations
+          scalable.
+        </li>
+      </ul>
+
+      <p>
+        When you can deliver on all three, A<sup>3</sup>RA stops being an abstract ideal
+        and becomes a durable part of competitive advantage.
+      </p>
+
+      <h2 id="whats-next">What’s next</h2>
+
+      <p>
+        The takeaway is simple: trustworthy actions are necessary. Business continuity
+        makes them non-negotiable.
+      </p>
+
+      <p>
+        The SCG Framework is where those two realities meet. In the next Foundation, we’ll
+        get concrete about how responsibility is split across system layers to deliver on
+        this promise.
+      </p>
+
+      <div class="series-nav__row">
+        <a class="series-nav__prev" href="/foundations/defining-action.html">
+          ← Previous: Foundation 2 — Defining a Trustworthy Action
+        </a>
+
+        <a class="series-nav__next" href="/foundations/responsibility-model.html">
+          Next: Foundation 4 — The SCG Responsibility Model →
+        </a>
+      </div>
+
+      <footer>
+        <hr />
+        <p>
+          © 2026 A<sup>3</sup>RA · CC BY-ND 4.0 ·
+          <a href="../license.html">License</a> ·
+          <a href="../">Home</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

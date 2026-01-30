@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>[Document Title] · A³RA Foundations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="[One-sentence description]" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <p><a href="./">← A³RA Foundations</a></p>
+        <h1>The SCG Responsibility Model</h1>
+        <p class="subtitle">
+          How Security, Compliance, and Governance divide responsibility to make
+          trustworthy action enforceable at scale
+        </p>
+      </header>
+
+      <h2 id="introduction">Introduction</h2>
+
+      <p>
+        In this series, we established <strong>A<sup>3</sup>RA</strong> as the test for
+        trustworthy action and introduced the
+        <strong>Security, Compliance, and Governance (SCG)</strong>
+        Framework as an architectural model for passing that test at scale, with minimal
+        cost and complexity.
+      </p>
+
+      <p>
+        The SCG Framework assumes that <strong>Compliance</strong> is the most
+        commercially valuable capability to automate—and therefore the practical objective
+        of the design.
+      </p>
+
+      <p>A compliance objective may include:</p>
+
+      <ul>
+        <li>
+          Granting market access and avoiding fines (for example: EU Cyber Resilience Act,
+          data residency requirements, the EU Data Act).
+        </li>
+        <li>
+          Achieving industry certification (for example: a target security level within
+          IEC/ISA 62443-4-2).
+        </li>
+        <li>
+          Satisfying internal policy requirements (for example: a minimum security posture
+          required by corporate policy, or a product differentiation requirement).
+        </li>
+      </ul>
+
+      <p>
+        In this model, connected product <strong>Security</strong> is not an end in
+        itself, but the essential foundation in service of compliance objectives.
+        <strong>Governance</strong> updates policy, prioritizes remediation, and ensures
+        accountability—also in service of compliance objectives.
+      </p>
+
+      <p>
+        <strong>Compliance</strong> itself is a comparative function: it evaluates the
+        Security Posture of connected products against regulations, standards, and policy
+        obligations. Because multiple compliance objectives will exist simultaneously, the
+        SCG Framework is designed to scale in complexity over time.
+      </p>
+
+      <p>
+        Critically, compliance objectives are enforced across the two logical planes where
+        cyber-physical actions take place:
+      </p>
+
+      <ul>
+        <li>
+          The <strong>Data Plane</strong> defines interfaces and policy for telemetry,
+          analytics, and diagnostics.
+        </li>
+        <li>
+          The <strong>Control Plane</strong> defines interfaces for firmware updates,
+          configuration changes, and actuation commands.
+        </li>
+      </ul>
+
+      <p>
+        The SCG Framework is also designed so that the center of gravity for each letter
+        in the acronym maps to natural physical or logical abstractions in connected
+        service design:
+        <strong>the Edge</strong> (Security),
+        <strong>the Operational Cloud</strong> (Compliance), and
+        <strong>the Policy Cloud</strong> (Governance).
+      </p>
+
+      <p>
+        In practice these responsibilities are not mutually exclusive, but the division of
+        labor serves as a useful mental model. Collectively, SCG makes the principles of
+        A<sup>3</sup>RA—admissible, attributable, auditable, and recoverable action—a
+        commercially viable, technically enforceable reality.
+      </p>
+
+      <h2 id="layer-1">Layer 1: Security at the Edge — “The Actor”</h2>
+
+      <p>
+        The device/edge layer is where actions physically occur. This is the
+        <strong>Actor</strong> in the model, operating in the real world. For this layer
+        to be both safe and effective, it must be an empowered and responsible agent.
+      </p>
+
+      <h3 id="layer-1-role">
+        Primary role: Local admissibility &amp; attributable action
+      </h3>
+
+      <ul>
+        <li>
+          <strong>Enforces local admissibility:</strong> the edge enforces admissibility
+          locally by acting on rules provided by the cloud. It continuously checks its own
+          actions against those rules to ensure it is operating acceptably.
+        </li>
+        <li>
+          <strong>Guarantees foundational safety:</strong> it enforces hardcoded,
+          non-negotiable safety constraints (for example: “never exceed a physical limit”)
+          that cannot be overridden by remote command.
+        </li>
+        <li>
+          <strong>Acts with verifiable integrity:</strong> it uses secure, cryptographic
+          identity to make actions and reports attributable, proving the device is the
+          authentic source.
+        </li>
+      </ul>
+
+      <h3 id="layer-1-design">Implementation design</h3>
+
+      <p>
+        In the SCG Framework, the Edge is principally responsible for the
+        <strong>Security</strong> of the device.
+      </p>
+
+      <p>
+        Security is the verifiable, machine-observable description of a connected
+        product’s actual state at a point in time. It consists of immutable or
+        slow-changing properties, dynamic states, and local policy that collectively
+        express integrity, identity, and operational condition. This is captured as the
+        device’s
+        <strong>Security Posture</strong>.
+      </p>
+
+      <p>
+        The Security Posture may be managed directly on the device, or managed on behalf
+        of the device by a gateway, depending on topology and whether the architecture is
+        retrofitting brownfield devices or implementing a greenfield design.
+      </p>
+
+      <p>
+        Security in SCG is <strong>descriptive, not evaluative</strong>. It answers:
+        <em>“What is this device, and what state is it in right now?”</em>
+      </p>
+
+      <p>
+        Security does <strong>not</strong> determine whether a state is acceptable, legal,
+        or permitted—that responsibility belongs to Compliance. Instead, Security provides
+        the ground truth on which all compliance decisions and governance actions depend.
+      </p>
+
+      <p>
+        Typical security properties include firmware identity, cryptographic credentials,
+        configuration state, execution mode, and attested measurements originating from
+        the device or its trusted runtime.
+      </p>
+
+      <h2 id="layer-2">Layer 2: Compliance in the Operational Cloud — “The Arbiter”</h2>
+
+      <p>
+        The Operational Cloud serves as the compliance engine for a fleet of connected
+        products. This is the
+        <strong>Arbiter</strong>: it compares each device’s Security Posture against a
+        contextual definition of compliance. It inherits policy definitions and access
+        rights from the Policy Cloud and re-hydrates context needed to evaluate whether
+        posture is within an acceptable range for one or more compliance objectives.
+      </p>
+
+      <h3 id="layer-2-role">
+        Primary role: Defining admissibility &amp; observing compliance
+      </h3>
+
+      <ul>
+        <li>
+          <strong>Defines and distributes rules of admissibility:</strong> the Arbiter
+          translates high-level goals from Governance into concrete operational rules and
+          securely provides them to edge devices.
+        </li>
+        <li>
+          <strong>Compares current posture to compliant ranges:</strong> it monitors the
+          fleet to detect drift outside permitted boundaries, without becoming a
+          transactional bottleneck for every action.
+        </li>
+        <li>
+          <strong>Arbitrates fleet-level decisions:</strong> it handles admissibility
+          questions that require a cross-asset view no single device possesses (for
+          example: coordinating actions between assets).
+        </li>
+      </ul>
+
+      <h3 id="layer-2-design">Implementation design</h3>
+
+      <p>
+        Rather than enforcing a single static configuration (which often breaks industrial
+        operations), the compliance engine evaluates whether a device’s current posture
+        falls within a permitted set of values:
+      </p>
+
+      <pre>
+Compliance(Device) = for all properties P in Posture(Device):
+                     Value(P) ∈ AcceptableRange(P)
+</pre
+      >
+
+      <p>
+        For each property in the Security Posture, define an acceptable range that can be
+        dynamic and contextual:
+      </p>
+
+      <pre>
+AcceptableRange(P) may include:
+- allowed_values:   e.g., permitted firmware versions
+- allowed_min/max:  e.g., certificate age windows, patch-level dates, utilization thresholds
+- context_rules:    e.g., site/operator constraints, maintenance mode exceptions, safe-mode status
+</pre
+      >
+
+      <p>
+        This model is intrinsically dynamic. It allows multiple valid firmware versions,
+        varying certificate expiry windows, and exception states (for example: maintenance
+        mode) to exist simultaneously in a compliant fleet. That flexibility enables
+        automation at fleet scale while accommodating the messy reality of operations.
+      </p>
+
+      <p>
+        The Arbiter’s job is to ensure the right rules are in the right hands—and to be
+        the first to know when those rules are not being followed.
+      </p>
+
+      <h2 id="layer-3">Layer 3: Governance in the Policy Cloud — “The Authority”</h2>
+
+      <p>
+        Governance is where human intent meets the system. It is where leaders define
+        mission objectives and where ultimate accountability resides. It defines who is
+        authorized to change posture, what happens when compliance fails, and how
+        remediation is prioritized. This is the <strong>Authority</strong>.
+      </p>
+
+      <h3 id="layer-3-role">Primary role: Setting intent &amp; owning accountability</h3>
+
+      <ul>
+        <li>
+          <strong>Authoritative source of intent:</strong> business, operational, safety,
+          and legal policies originate here.
+        </li>
+        <li>
+          <strong>Manages digital rights:</strong> governs who can define policy, who can
+          operate the system, and who can intervene in emergencies (for both humans and
+          devices).
+        </li>
+        <li>
+          <strong>Anchors auditability:</strong> holds the rationale and history behind
+          the rules enforced across the fleet.
+        </li>
+      </ul>
+
+      <h3 id="layer-3-design">Implementation design</h3>
+
+      <p>
+        The Policy Cloud owns global governance logic and policy enforcement. It pushes
+        policies southbound to the Operational Cloud, defining:
+      </p>
+
+      <ul>
+        <li><strong>Constraints</strong> (for example: minimum firmware versions)</li>
+        <li>
+          <strong>Requirements</strong> (for example: mandatory network isolation
+          patterns)
+        </li>
+        <li>
+          <strong>Configuration</strong> (for example: data manifest rules and
+          application-specific requirements)
+        </li>
+      </ul>
+
+      <p>
+        Industrial assets—especially mobile ones—often operate in denied environments
+        where connectivity is intermittent. For this reason, SCG relies on
+        <strong>cached governance at the Edge</strong>.
+      </p>
+
+      <ul>
+        <li>
+          <strong>Persistence of policies:</strong> the device enforces the last known
+          good policies even when offline. It cannot revert to an insecure state simply
+          because the cloud is unreachable.
+        </li>
+        <li>
+          <strong>Audit caching:</strong> governance events are logged locally for future
+          audit (for example: local logins, blocked actions) and queued for upload when
+          connectivity returns. A posture “bookmark” can indicate the last successfully
+          synchronized audit position so the cloud can recover missing events and preserve
+          chain of custody.
+        </li>
+      </ul>
+
+      <h3 id="authority-scopes">Defining clear scopes of authority</h3>
+
+      <p>
+        A key function of Governance is recognizing that authority is not
+        one-size-fits-all. The framework accounts for this by defining clear scopes of
+        authority so the right people have the right level of control.
+      </p>
+
+      <p>
+        <strong>Authority can be geographic:</strong> a fleet manager for Europe has
+        authority over European assets but cannot change rules for devices in North
+        America.
+      </p>
+
+      <p>
+        <strong>Authority can be role-based:</strong> a support technician may be
+        authorized to view diagnostics but not to issue firmware updates. That power is
+        reserved for qualified roles.
+      </p>
+
+      <p>
+        This enforces least privilege at the highest level of the system and creates a
+        clear audit trail showing not just what policy changed, but who had correctly
+        scoped authority to change it.
+      </p>
+
+      <p>The Governance layer is where authority originates—and where the buck stops.</p>
+
+      <h2 id="why-separation-matters">Why this separation matters</h2>
+
+      <h3 id="resilience-safety">Resilience and safety by design</h3>
+
+      <p>
+        Because the edge has its own understanding of admissibility, it can continue
+        operating safely—even if it loses connection to the cloud. This is foundational to
+        resilient systems.
+      </p>
+
+      <h3 id="agility-scalability">Agility and scalability</h3>
+
+      <p>
+        The cloud is freed from being a transactional bottleneck. By focusing on defining
+        rules and observing exceptions, it can manage a fleet of millions as effectively
+        as a fleet of one hundred. When regulations change, the Arbiter distributes new
+        rules—without requiring firmware updates or fleet-wide downtime.
+      </p>
+
+      <h3 id="auditability-clarity">Auditability without ambiguity</h3>
+
+      <p>
+        This architecture provides a clear, defensible audit trail. When an incident
+        occurs, the questions are simple and the answers are clear:
+      </p>
+
+      <ul>
+        <li>Who defined the policy intent? <em>(The Authority.)</em></li>
+        <li>
+          What rules of admissibility were sent to the device? <em>(The Arbiter.)</em>
+        </li>
+        <li>Did the device enforce those rules? <em>(The Actor.)</em></li>
+      </ul>
+
+      <p>
+        This transforms A<sup>3</sup>RA from a concept into an implementable and
+        defensible architecture.
+      </p>
+
+      <h2 id="conclusion">Conclusion</h2>
+
+      <p>
+        The SCG Framework is more than a technical architecture; it is a model for
+        operationalizing trust.
+      </p>
+
+      <p>
+        By defining responsibilities across Security (the Actor), Compliance (the
+        Arbiter), and Governance (the Authority), it provides a clear path to achieving
+        and maintaining a trustworthy posture for connected products at scale. It turns
+        the abstract principles of A<sup>3</sup>RA into a commercially viable and
+        technically enforceable reality.
+      </p>
+
+      <p>
+        It recognizes that the edge must be an empowered, responsible agent—not a dumb
+        endpoint. It treats compliance as dynamic, not a checkbox. And it addresses
+        disconnected operations through resilient cached governance.
+      </p>
+
+      <p>
+        This is how organizations move beyond treating security and compliance as a tax
+        and begin to leverage them as a competitive advantage—unlocking market access,
+        building customer confidence, and enabling innovation with a foundation of
+        verifiable trust.
+      </p>
+
+      <p>
+        Now that the architecture and its core responsibilities are defined, we can turn
+        to the data that brings it to life.
+      </p>
+
+      <p>
+        Next: the essential pillars of a device’s Security Posture—what a device must
+        provide to prove its own trustworthiness and enable the compliance, governance,
+        and remediation cycle this framework makes possible.
+      </p>
+
+      <div class="series-nav__row">
+        <a class="series-nav__prev" href="/foundations/scg-commercial.html">
+          ← Previous: Foundation 3 — The Commercial Argument for the SCG Framework
+        </a>
+
+        <a class="series-nav__next" href="/foundations/security-posture.html">
+          Next: Foundation 5 — The Security Posture Model →
+        </a>
+      </div>
+
+      <footer>
+        <hr />
+        <p>
+          © 2026 A<sup>3</sup>RA · CC BY-ND 4.0 ·
+          <a href="../license.html">License</a> ·
+          <a href="../">Home</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

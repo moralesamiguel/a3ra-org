@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>[Document Title] · A³RA Foundations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="[One-sentence description]" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <p><a href="./">← A³RA Foundations</a></p>
+        <h1>The Security Posture Model</h1>
+        <p class="subtitle">Trust Anchor, B-R-E Evidence, and the Manifest</p>
+      </header>
+
+       <p>
+          In the previous Foundation, we defined the three layers of the SCG Framework:
+          the Actor, the Arbiter, and the Authority. That system depends on a continuous
+          flow of data from the edge device.
+        </p>
+
+        <p>
+          To make trustworthy decisions, systems cannot rely on an arbitrary collection
+          of metrics. They require a formal data model that describes device state in a
+          structured, verifiable way. In the SCG Framework, this model is called the
+          <strong>Security Posture Model</strong>.
+        </p>
+
+        <p>
+          The Security Posture Model is not a flat list of attributes. It is a hierarchy
+          of dependencies built on a foundation of trust. It consists of three tightly
+          coupled components:
+        </p>
+
+        <ol>
+          <li>The Trust Anchor (Identity)</li>
+          <li>Security Posture Evidence (B-R-E)</li>
+          <li>The Manifest (Local Authority Scope)</li>
+        </ol>
+      </section>
+
+      <section id="trust-anchor">
+        <h2>1. The Foundation: The Trust Anchor (Identity)</h2>
+        <p><strong>Role:</strong> The prerequisite for belief.</p>
+
+        <p>
+          Before we can believe what a device reports, we must first trust who is
+          speaking. The Trust Anchor is the device’s foundational cryptographic identity.
+          It is not posture data itself; it is the root of trust that makes posture data
+          believable.
+        </p>
+
+        <p>Its sole purpose is to provide a secure origin for cryptographic proof.</p>
+
+        <p>
+          <strong>Key question it answers:</strong>
+          “Can this device prove it is who it claims to be?”
+        </p>
+
+        <p>
+          The strength of the Trust Anchor directly determines how much trust can be
+          placed in the device’s data — and what level of authority can safely be
+          delegated to it. Choosing an anchor is therefore a fundamental risk management
+          decision.
+        </p>
+
+        <h3 id="trust-anchor-hardware">Hardware-backed (e.g. TPM)</h3>
+        <p>
+          This is the highest-assurance tier. A hardware-backed identity enables trusted
+          boot, secure key storage, and strong attestation, making it possible to
+          automate high-impact Control Plane actions such as firmware updates.
+        </p>
+
+        <h3 id="trust-anchor-software">Software-backed (e.g. software agent)</h3>
+        <p>
+          A key protected by the operating system provides moderate assurance. Data
+          streams may be trusted under normal conditions, but high-risk actions may
+          require additional verification or human approval.
+        </p>
+
+        <h3 id="trust-anchor-declarative">Declarative (e.g. MAC address)</h3>
+        <p>
+          This provides the lowest assurance and is suitable only for low-risk Data Plane
+          monitoring. Without cryptographic identity, data is not truly attributable,
+          and Control Plane authority should be disabled by default.
+        </p>
+      </section>
+
+      <section id="bre-evidence">
+        <h2>2. The Evidence: Security Posture Evidence (B-R-E)</h2>
+        <p><strong>Role:</strong> The set of verifiable facts.</p>
+
+        <p>
+          Once identity is established, the device must present evidence. This evidence
+          is the Security Posture itself: the descriptive facts about the device’s build,
+          its current internal state, and its external operating environment.
+        </p>
+
+        <p>
+          <strong>Key question it answers:</strong>
+          “What is the device’s state and its operational situation right now?”
+        </p>
+
+        <p>
+          This evidence model is not one-size-fits-all. Its scope expands or contracts
+          based on compliance objectives (e.g. EU CRA), assurance level (e.g. IEC 62443),
+          and system autonomy. The posture evidence is grouped into three categories:
+        </p>
+
+        <h3 id="bre-build">(B)uild-time properties</h3>
+        <p>
+          The device’s “golden baseline” properties — static or slow-changing relative to
+          operation. Examples include hardware model, firmware identity, and SBOM.
+        </p>
+
+        <h3 id="bre-runtime">(R)un-time properties</h3>
+        <p>
+          The device’s live internal state: execution mode, memory usage, active
+          connections, and enforced policy configuration. These properties help detect
+          drift, compromise, or unsafe operating modes.
+        </p>
+
+        <h3 id="bre-environment">(E)nvironment properties</h3>
+        <p>
+          The device’s observed external context, such as network segment, physical
+          location, or connected peripherals. These contextual signals influence
+          admissibility and safety decisions.
+        </p>
+
+        <p>
+          While described here for a single device, the model naturally extends to
+          composite systems where a controller aggregates and evaluates the postures of
+          subordinate components.
+        </p>
+      </section>
+
+      <section id="manifest">
+        <h2>3. The Rules: The Manifest</h2>
+        <p><strong>Role:</strong> The embodiment of the device’s Explicit Authority Scope.</p>
+
+        <p>
+          Evidence alone is descriptive; it does not grant authority to act. Authority
+          must be explicitly delegated.
+        </p>
+
+        <p>
+          This delegation is expressed through the Manifest — the local, signed
+          representation of the device’s Explicit Authority Scope. The Manifest defines
+          what the device is permitted to do, under what conditions, and how it must
+          respond when conditions are not met.
+        </p>
+
+        <p>It is provisioned by the Governance layer and enforced locally by the device.</p>
+
+        <p><strong>Key questions it answers:</strong></p>
+        <ul>
+          <li>Is this proposed action within my Explicit Authority Scope?</li>
+          <li>Is it admissible right now?</li>
+          <li>If not, what remediation is authorized?</li>
+        </ul>
+
+        <h3 id="local-vs-cloud">Local vs. cloud evaluation</h3>
+        <p>
+          The Manifest enables a local control loop, distinct from full cloud-based
+          compliance evaluation.
+        </p>
+
+        <h4 id="local-decisions">Local Decisions &amp; Remediation (Within Scope)</h4>
+        <p>
+          The device autonomously enforces policy within its delegated authority and
+          records all actions in its local journal.
+        </p>
+        <ul>
+          <li>
+            <strong>Control Plane:</strong>
+            “I am connected to an unauthorized Wi-Fi network. My scope authorizes me to
+            disable the interface and log the action.”
+          </li>
+          <li>
+            <strong>Data Plane:</strong>
+            “This record contains PII requiring redaction. I am authorized to redact
+            locally before transmission.”
+          </li>
+        </ul>
+
+        <h4 id="cloud-evaluation">Comprehensive Cloud Evaluation (Outside Scope)</h4>
+        <p>Actions requiring broader context or higher authority are escalated to the Arbiter.</p>
+        <ul>
+          <li>
+            <strong>Control Plane:</strong>
+            “My firmware is out of date. I lack authority to update myself. I will report
+            this state for remediation.”
+          </li>
+          <li>
+            <strong>Data Plane:</strong>
+            “I am asked to transmit a data type not defined in my Manifest. This exceeds
+            my Authority Scope. Transmission is blocked pending policy update.”
+          </li>
+        </ul>
+      </section>
+
+      <section id="conclusion">
+        <h2>Conclusion: A Resilient and Auditable Model</h2>
+        <p>
+          The Security Posture Model — composed of a Trust Anchor, B-R-E evidence, and a
+          Manifest — creates a verifiable chain of trust from identity to action.
+        </p>
+
+        <p>
+          It enables attribution, distributed admissibility, and recoverability through a
+          two-stage process:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Locally:</strong> the device enforces policy, performs remediation within
+            scope, and journals actions.
+          </li>
+          <li>
+            <strong>In the cloud:</strong> journals synchronize on reconnection, posture is
+            evaluated against full policy, and governance actions are taken.
+          </li>
+        </ul>
+
+        <p>
+          This model is the engine that powers the SCG Framework, enabling scalable,
+          automated, and accountable governance — from local recovery to fleet-wide
+          compliance.
+        </p>
+       <div class="series-nav__row">
+    <a class="series-nav__prev" href="/foundations/responsibility-model.html">
+      ← Previous: Foundation 4 — The SCG Responsibility Model
+    </a>
+
+  </div>
+      <footer>
+        <hr />
+        <p>
+          © 2026 A<sup>3</sup>RA · CC BY-ND 4.0 ·
+          <a href="../license.html">License</a> ·
+          <a href="../">Home</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
