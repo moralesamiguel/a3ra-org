@@ -1,0 +1,4 @@
+*.min.*
+dist
+build
+node_modules
